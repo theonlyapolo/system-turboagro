@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Análises</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            font-family: 'Manrope', 'Noto Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .menu-sanduiche {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .menu-sanduiche a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: #333;
+        }
+        .menu-sanduiche a:hover {
+            background: #f0f4f0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+        .fazenda-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .fazenda-card img {
+            width: 100px;
+            height: 70px;
+            border-radius: 8px;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ddd;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="flex items-center bg-white p-4 pb-2 justify-between">
+        <button onclick="toggleMenu()" class="text-[#111811] flex size-12 shrink-0 items-center">
+            ☰
+        </button>
+        <h2 class="text-[#111811] text-lg font-bold leading-tight">Histórico de Análises</h2>
+        <div class="flex w-12 items-center justify-end"></div>
+    </nav>
+
+    <div class="menu-sanduiche" id="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="p-4">
+        <div class="fazenda-card" onclick="window.location.href='resultados.html'">
+            <div>
+                <p class="text-[#638863] text-sm">Fertilidade Alta</p>
+                <p class="text-[#111811] text-base font-bold">Fazenda Santa Helena</p>
+                <p class="text-[#638863] text-sm">Gleba 01 - 15/11/2021</p>
+            </div>
+            <img src="https://cdn.usegalileo.ai/sdxl10/f6a8dd08-0229-48d1-a085-1a5ac051070b.png" alt="Fazenda">
+        </div>
+
+        <div class="fazenda-card" onclick="window.location.href='resultados.html'">
+            <div>
+                <p class="text-[#638863] text-sm">Fertilidade Média</p>
+                <p class="text-[#111811] text-base font-bold">Fazenda Santa Helena</p>
+                <p class="text-[#638863] text-sm">Gleba 02 - 15/11/2021</p>
+            </div>
+            <img src="https://cdn.usegalileo.ai/sdxl10/a5e23752-dc16-4771-81a9-406fbf2748a9.png" alt="Fazenda">
+        </div>
+
+        <div class="fazenda-card" onclick="window.location.href='resultados.html'">
+            <div>
+                <p class="text-[#638863] text-sm">Fertilidade Baixa</p>
+                <p class="text-[#111811] text-base font-bold">Fazenda Santa Helena</p>
+                <p class="text-[#638863] text-sm">Gleba 03 - 15/11/2021</p>
+            </div>
+            <img src="https://cdn.usegalileo.ai/sdxl10/4eb27221-5711-4468-ab6c-76d3d5849f80.png" alt="Fazenda">
+        </div>
+
+        <div class="fazenda-card" onclick="window.location.href='resultados.html'">
+            <div>
+                <p class="text-[#638863] text-sm">Fertilidade Alta</p>
+                <p class="text-[#111811] text-base font-bold">Fazenda Santa Helena</p>
+                <p class="text-[#638863] text-sm">Gleba 04 - 15/11/2021</p>
+            </div>
+            <img src="https://cdn.usegalileo.ai/sdxl10/b123533e-f6e3-486c-bb3b-94ba14f350c8.png" alt="Fazenda">
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>

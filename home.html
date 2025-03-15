@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurboAgro - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #ffffff;
+            color: #111811;
+        }
+        .menu-hidden {
+            transform: translateX(-100%);
+        }
+        .menu-visible {
+            transform: translateX(0);
+        }
+        .carrossel {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carrossel::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-white flex flex-col min-h-screen">
+
+    <!-- Navbar com Menu Sanduíche -->
+    <nav class="flex items-center justify-between p-4 bg-white shadow-md">
+        <button id="menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M40 128a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8zM40 64a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8zM40 192a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8z"></path>
+            </svg>
+        </button>
+        <p class="text-lg font-bold">TurboAgro</p>
+        <div></div>
+    </nav>
+
+    <!-- Menu lateral oculto -->
+    <div id="menu" class="fixed top-0 left-0 w-64 bg-white shadow-lg h-full menu-hidden transition-transform duration-300">
+        <ul class="p-4 space-y-4">
+            <li><a href="home.html" class="block text-lg font-semibold">Início</a></li>
+            <li><a href="historico_analise.html" class="block text-lg font-semibold">Histórico</a></li>
+            <li><a href="fazendas.html" class="block text-lg font-semibold">Minhas Fazendas</a></li>
+            <li><a href="configuracoes.html" class="block text-lg font-semibold">Configurações</a></li>
+        </ul>
+    </div>
+
+    <!-- Perfil -->
+    <div class="p-4 flex items-center space-x-4">
+        <img class="w-16 h-16 rounded-full" src="https://cdn.usegalileo.ai/sdxl10/new_agronomo.png" alt="Perfil">
+        <div>
+            <p class="text-xl font-bold">Olá, Maria</p>
+            <p class="text-gray-600">Pronta para fazer uma nova análise?</p>
+        </div>
+    </div>
+
+    <!-- Últimas Análises -->
+    <h2 class="text-xl font-bold px-4 pt-5">Últimas Análises</h2>
+    <div class="carrossel px-4 py-2 space-x-4">
+        <div class="w-40 bg-gray-100 p-2 rounded-lg flex-shrink-0">
+            <img class="rounded-lg" src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" alt="Fazenda 1">
+            <p class="font-medium mt-2">Fazenda Alegria</p>
+            <p class="text-gray-500 text-sm">02/12/22</p>
+        </div>
+        <div class="w-40 bg-gray-100 p-2 rounded-lg flex-shrink-0">
+            <img class="rounded-lg" src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" alt="Fazenda 2">
+            <p class="font-medium mt-2">Fazenda Felicidade</p>
+            <p class="text-gray-500 text-sm">01/30/22</p>
+        </div>
+        <div class="w-40 bg-gray-100 p-2 rounded-lg flex-shrink-0">
+            <img class="rounded-lg" src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" alt="Fazenda 3">
+            <p class="font-medium mt-2">Fazenda Esperança</p>
+            <p class="text-gray-500 text-sm">01/15/22</p>
+        </div>
+    </div>
+
+    <!-- Botão Nova Análise -->
+    <div class="px-4 py-3">
+        <button onclick="window.location.href='fazendas.html'" class="w-full bg-green-500 text-white font-bold py-3 rounded-xl">
+            Nova Análise
+        </button>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="flex justify-around bg-white p-3 shadow-inner fixed bottom-0 w-full">
+        <a class="text-green-500 font-bold" href="home.html">Início</a>
+        <a class="text-gray-500" href="historico_analise.html">Histórico</a>
+        <a class="text-gray-500" href="configuracoes.html">Configurações</a>
+    </footer>
+
+    <script>
+        // Alternar Menu Sanduíche
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            let menu = document.getElementById('menu');
+            menu.classList.toggle('menu-hidden');
+            menu.classList.toggle('menu-visible');
+        });
+    </script>
+
+</body>
+</html>

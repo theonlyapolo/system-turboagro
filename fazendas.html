@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
+    <title>TurboAgro - Fazendas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="relative flex size-full min-h-screen flex-col bg-white justify-between overflow-x-hidden" style="font-family: Manrope, sans-serif;">
+    
+    <!-- Menu Sanduíche -->
+    <div id="menuSidebar" class="fixed top-0 left-[-100%] w-64 h-full bg-white shadow-md transition-all duration-300 z-50">
+      <div class="p-4">
+        <h2 class="text-[#111811] text-lg font-bold mb-4">Menu</h2>
+        <ul class="space-y-3">
+          <li><a href="home.html" class="text-[#111811] block">Início</a></li>
+          <li><a href="historico_analise.html" class="text-[#111811] block">Histórico</a></li>
+          <li><a href="configuracoes.html" class="text-[#111811] block">Configurações</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40"></div>
+
+    <div>
+      <!-- Barra de Navegação -->
+      <div class="flex items-center bg-white p-4 pb-2 justify-between">
+        <button onclick="toggleMenu()" class="text-[#111811]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+          </svg>
+        </button>
+        <h2 class="text-[#111811] text-lg font-bold flex-1 text-center">Minhas Fazendas</h2>
+        <div class="w-12"></div>
+      </div>
+
+      <!-- Campo de Busca -->
+      <div class="px-4 py-3">
+        <label class="flex flex-col min-w-40 h-12 w-full">
+          <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+            <div class="text-[#638863] flex border-none bg-[#f0f4f0] items-center justify-center pl-4 rounded-l-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+              </svg>
+            </div>
+            <input placeholder="Pesquisar fazenda" class="form-input w-full h-full bg-[#f0f4f0] px-4 text-base rounded-r-xl placeholder-[#638863] border-none" />
+          </div>
+        </label>
+      </div>
+
+      <!-- Lista de Fazendas -->
+      <div class="p-4">
+        <div class="cursor-pointer flex items-center gap-4 p-2 rounded-xl" onclick="window.location.href='configanalise.html'">
+          <div class="flex flex-col">
+            <p class="text-[#638863] text-sm">Soja</p>
+            <p class="text-[#111811] text-base font-bold">Fazenda do João</p>
+            <p class="text-[#638863] text-sm">Rio Grande do Sul</p>
+          </div>
+          <img src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" class="w-24 h-24 rounded-xl object-cover" />
+        </div>
+      </div>
+
+      <div class="p-4">
+        <div class="cursor-pointer flex items-center gap-4 p-2 rounded-xl" onclick="window.location.href='configanalise.html'">
+          <div class="flex flex-col">
+            <p class="text-[#638863] text-sm">Milho</p>
+            <p class="text-[#111811] text-base font-bold">Fazenda do Pedro</p>
+            <p class="text-[#638863] text-sm">Mato Grosso</p>
+          </div>
+          <img src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" class="w-24 h-24 rounded-xl object-cover" />
+        </div>
+      </div>
+
+      <div class="p-4">
+        <div class="cursor-pointer flex items-center gap-4 p-2 rounded-xl" onclick="window.location.href='configanalise.html'">
+          <div class="flex flex-col">
+            <p class="text-[#638863] text-sm">Café</p>
+            <p class="text-[#111811] text-base font-bold">Fazenda da Maria</p>
+            <p class="text-[#638863] text-sm">Paraná</p>
+          </div>
+          <img src="https://cdn.usegalileo.ai/sdxl10/e1d9f497-89a3-42d7-8121-99deff462e35.png" class="w-24 h-24 rounded-xl object-cover" />
+        </div>
+      </div>
+
+      <!-- Botão Adicionar Fazenda -->
+      <div class="flex px-4 py-3">
+        <button class="w-full h-12 bg-[#19e619] text-[#111811] text-base font-bold rounded-xl">Adicionar nova fazenda</button>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="flex gap-2 border-t border-[#f0f4f0] bg-white px-4 pb-3 pt-2">
+      <a class="flex-1 text-center text-[#638863]" href="home.html">Início</a>
+      <a class="flex-1 text-center text-[#111811]" href="historico_analise.html">Histórico</a>
+      <a class="flex-1 text-center text-[#638863]" href="configuracoes.html">Configurações</a>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menuSidebar");
+        const overlay = document.getElementById("overlay");
+        const isOpen = menu.style.left === "0px";
+        menu.style.left = isOpen ? "-100%" : "0px";
+        overlay.classList.toggle("hidden", isOpen);
+      }
+
+      document.getElementById("overlay").addEventListener("click", toggleMenu);
+    </script>
+
+  </body>
+</html>

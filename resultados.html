@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Análise</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .menu-dropdown a {
+            display: block;
+            padding: 8px 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .menu-dropdown a:hover {
+            background: #ddd;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .carrossel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 10px;
+            padding: 10px 0;
+            width: 100%;
+            scrollbar-width: none;
+        }
+        .carrossel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .card {
+            min-width: 250px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: start;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .expanded {
+            width: 100%;
+            max-width: 350px;
+            min-height: 300px;
+        }
+        canvas {
+            width: 100%;
+            height: 150px;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            border-top: 1px solid #ddd;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background: lightgray;
+            border-radius: 50%;
+            margin: 0 5px;
+            transition: background 0.3s;
+        }
+        .active {
+            background: darkgreen;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn-green {
+            background-color: #19e619;
+            color: white;
+        }
+        .btn-gray {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <h2>Fazenda do João</h2>
+        <div></div> <!-- Espaço para alinhar -->
+    </div>
+
+    <div class="menu-dropdown" id="menuDropdown">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+
+    <div class="container">
+        <p>Análise realizada em 10 de Junho, 2023</p>
+
+        <div class="carrossel-container" id="carousel">
+            <div class="card" onclick="expandCard(this)">
+                <h3>pH</h3>
+                <canvas id="graficoPH"></canvas>
+            </div>
+            <div class="card" onclick="expandCard(this)">
+                <h3>Nitrogênio</h3>
+                <canvas id="graficoNitrogenio"></canvas>
+            </div>
+            <div class="card" onclick="expandCard(this)">
+                <h3>Magnésio</h3>
+                <canvas id="graficoMagnesio"></canvas>
+            </div>
+            <div class="card" onclick="expandCard(this)">
+                <h3>Alumínio</h3>
+                <canvas id="graficoAluminio"></canvas>
+            </div>
+            <div class="card" onclick="expandCard(this)">
+                <h3>Cloro</h3>
+                <canvas id="graficoCloro"></canvas>
+            </div>
+        </div>
+        <div class="carousel-indicators" id="indicators"></div>
+
+        <div class="button-container">
+            <button class="button btn-green" onclick="gerarRelatorio()">Gerar Relatório PDF</button>
+            <button class="button btn-gray" onclick="window.location.href='home.html'">Iniciar Nova Análise</button>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menuDropdown");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        document.addEventListener("click", function(event) {
+            const menu = document.getElementById("menuDropdown");
+            const menuIcon = document.querySelector(".menu-icon");
+
+            if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+                menu.style.display = "none";
+            }
+        });
+
+        function expandCard(element) {
+            if (element.classList.contains('expanded')) {
+                element.classList.remove('expanded');
+            } else {
+                document.querySelectorAll('.card').forEach(card => card.classList.remove('expanded'));
+                element.classList.add('expanded');
+            }
+        }
+
+        function gerarRelatorio() {
+            alert("Relatório gerado com sucesso!");
+        }
+
+        function gerarGraficos() {
+            const valoresAleatorios = () => (Math.random() * (10 - 3) + 3).toFixed(2);
+
+            const ctxPH = document.getElementById('graficoPH').getContext('2d');
+            new Chart(ctxPH, {
+                type: 'bar',
+                data: {
+                    labels: ["pH"],
+                    datasets: [{ label: "pH do solo", data: [valoresAleatorios()], backgroundColor: "green" }]
+                }
+            });
+
+            const ctxNitrogenio = document.getElementById('graficoNitrogenio').getContext('2d');
+            new Chart(ctxNitrogenio, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Alto", "Médio", "Baixo"],
+                    datasets: [{ data: [valoresAleatorios(), valoresAleatorios(), valoresAleatorios()], backgroundColor: ["blue", "yellow", "red"] }]
+                }
+            });
+
+            const ctxMagnesio = document.getElementById('graficoMagnesio').getContext('2d');
+            new Chart(ctxMagnesio, { type: 'line', data: { labels: ["Semana 1", "Semana 2"], datasets: [{ data: [valoresAleatorios(), valoresAleatorios()], borderColor: "purple", fill: false }] } });
+
+            const ctxAluminio = document.getElementById('graficoAluminio').getContext('2d');
+            new Chart(ctxAluminio, { type: 'bar', data: { labels: ["Alumínio"], datasets: [{ data: [valoresAleatorios()], backgroundColor: "brown" }] } });
+
+            const ctxCloro = document.getElementById('graficoCloro').getContext('2d');
+            new Chart(ctxCloro, { type: 'pie', data: { labels: ["Baixo", "Médio", "Alto"], datasets: [{ data: [valoresAleatorios(), valoresAleatorios(), valoresAleatorios()], backgroundColor: ["blue", "orange", "green"] }] } });
+        }
+
+        document.addEventListener("DOMContentLoaded", gerarGraficos);
+    </script>
+
+</body>
+</html>

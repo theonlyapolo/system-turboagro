@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - TurboAgro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .menu-sanduiche {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+        }
+        .menu-sanduiche div {
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            margin: 5px 0;
+        }
+        .menu-lateral {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            background: white;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: none;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .menu-lateral a {
+            display: block;
+            margin: 5px 0;
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .menu-lateral.ativo {
+            display: block;
+        }
+        .profile-pic {
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            border-top: 1px solid #ddd;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .settings-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .settings-button:hover {
+            background-color: #f0f4f0;
+            border-color: #888;
+        }
+        .logout-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .logout-button:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-sanduiche" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="menu-lateral" id="menuLateral">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+        <a href="login.html" onclick="logout()">Sair</a>
+    </div>
+
+    <div class="container">
+        <h2>Configurações</h2>
+        <img class="profile-pic" src="https://cdn.usegalileo.ai/sdxl10/baeed253-7290-4d5e-bd89-359c24a74e22.png" alt="Perfil">
+        <p><strong>Usuário:</strong> Bianca Silva</p>
+        <p><strong>Email:</strong> bianca.silva@gmail.com</p>
+
+        <button class="settings-button">Editar Perfil</button>
+        <button class="settings-button">Assinatura e Plano</button>
+        <button class="settings-button">Alterar Senha</button>
+        <button class="settings-button">Notificações</button>
+        <button class="settings-button">Idioma</button>
+        <button class="settings-button">Unidade de Medida</button>
+        <button class="settings-button">Política de Privacidade</button>
+        <button class="settings-button">Termos de Uso</button>
+
+        <button class="logout-button" onclick="logout()">Sair da Conta</button>
+    </div>
+
+    <div class="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menuLateral");
+            menu.classList.toggle("ativo");
+            document.addEventListener("click", function closeMenu(event) {
+                if (!menu.contains(event.target) && !event.target.closest(".menu-sanduiche")) {
+                    menu.classList.remove("ativo");
+                    document.removeEventListener("click", closeMenu);
+                }
+            });
+        }
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

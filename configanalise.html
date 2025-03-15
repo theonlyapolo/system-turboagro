@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
+    <title>TurboAgro - Nova Análise</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="relative flex size-full min-h-screen flex-col bg-white justify-between overflow-x-hidden" style="font-family: Manrope, sans-serif;">
+    
+    <!-- Menu Sanduíche -->
+    <div id="menuSidebar" class="fixed top-0 left-[-100%] w-64 h-full bg-white shadow-md transition-all duration-300 z-50">
+      <div class="p-4">
+        <h2 class="text-[#111811] text-lg font-bold mb-4">Menu</h2>
+        <ul class="space-y-3">
+          <li><a href="home.html" class="text-[#111811] block">Início</a></li>
+          <li><a href="historico_analise.html" class="text-[#111811] block">Histórico</a></li>
+          <li><a href="configuracoes.html" class="text-[#111811] block">Configurações</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40"></div>
+
+    <!-- Barra de Navegação -->
+    <div class="flex items-center bg-white p-4 pb-2 justify-between">
+      <button onclick="window.history.back()" class="text-[#111811]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+        </svg>
+      </button>
+      <h2 class="text-[#111811] text-lg font-bold flex-1 text-center">Nova Análise de Solo</h2>
+      <button onclick="toggleMenu()" class="text-[#111811]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Informações da Fazenda -->
+    <div class="p-4">
+      <p class="text-[#111811] text-sm">Fazenda Selecionada</p>
+      <p class="text-[#111811] text-base font-bold">Fazenda do Bosque</p>
+    </div>
+
+    <div class="p-4">
+      <p class="text-[#111811] text-sm">Gleba</p>
+      <p class="text-[#111811] text-base font-bold">Gleba 1</p>
+    </div>
+
+    <!-- Captura de Localização -->
+    <div class="p-4">
+      <p class="text-[#111811] text-sm">Localização</p>
+      <p id="localizacao" class="text-[#111811] text-base font-bold">Latitude: - | Longitude: -</p>
+      <button onclick="capturarLocalizacao()" class="mt-2 w-full bg-[#f0f4f0] text-[#111811] text-sm font-bold py-2 rounded-lg">Capturar Localização</button>
+    </div>
+
+    <!-- Histórico de Manejo -->
+    <div class="p-4">
+      <label class="block text-[#111811] text-sm font-medium">Histórico de Manejo</label>
+      <textarea class="w-full h-20 mt-2 p-2 border border-gray-300 rounded-lg resize-none" placeholder="Digite aqui..."></textarea>
+    </div>
+
+    <!-- Botão Iniciar Análise -->
+    <div class="p-4">
+      <button onclick="window.location.href='captura_analise.html'" class="w-full bg-[#19e619] text-[#111811] text-base font-bold py-3 rounded-lg">
+        Iniciar Análise
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="flex gap-2 border-t border-[#f0f4f0] bg-white px-4 pb-3 pt-2">
+      <a class="flex flex-1 flex-col items-center text-[#638863]" href="home.html">Início</a>
+      <a class="flex flex-1 flex-col items-center text-[#111811]" href="historico_analise.html">Histórico</a>
+      <a class="flex flex-1 flex-col items-center text-[#638863]" href="configuracoes.html">Configurações</a>
+    </footer>
+
+    <script>
+      function capturarLocalizacao() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              let latitude = position.coords.latitude.toFixed(6);
+              let longitude = position.coords.longitude.toFixed(6);
+              document.getElementById("localizacao").innerText = `Latitude: ${latitude} | Longitude: ${longitude}`;
+            },
+            function (error) {
+              document.getElementById("localizacao").innerText = "Erro ao capturar localização.";
+              console.error("Erro ao obter localização:", error);
+            }
+          );
+        } else {
+          document.getElementById("localizacao").innerText = "Geolocalização não suportada pelo navegador.";
+        }
+      }
+
+      function toggleMenu() {
+        const menu = document.getElementById("menuSidebar");
+        const overlay = document.getElementById("overlay");
+        const isOpen = menu.style.left === "0px";
+        menu.style.left = isOpen ? "-100%" : "0px";
+        overlay.classList.toggle("hidden", isOpen);
+      }
+
+      // Permitir fechar o menu ao clicar fora dele
+      document.getElementById("overlay").addEventListener("click", function () {
+        toggleMenu();
+      });
+    </script>
+
+  </body>
+</html>

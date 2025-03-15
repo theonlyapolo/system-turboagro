@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processando Análise</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lista de dicas aleatórias
+            const dicas = [
+                { titulo: "Aumente a matéria orgânica", descricao: "Adicione composto orgânico e cobertura morta." },
+                { titulo: "Utilize rotação de culturas", descricao: "Plantar diferentes culturas melhora a fertilidade do solo." },
+                { titulo: "Evite a compactação", descricao: "Evite tráfego excessivo de máquinas para manter o solo aerado." },
+                { titulo: "Corrija o pH", descricao: "Se o solo estiver ácido, utilize calcário para equilibrar o pH." }
+            ];
+
+            // Seleciona duas dicas aleatórias para exibição
+            function selecionarDicas() {
+                const indices = [];
+                while (indices.length < 2) {
+                    let index = Math.floor(Math.random() * dicas.length);
+                    if (!indices.includes(index)) {
+                        indices.push(index);
+                    }
+                }
+                return [dicas[indices[0]], dicas[indices[1]]];
+            }
+
+            const dicasSelecionadas = selecionarDicas();
+            document.getElementById("dica1-titulo").innerText = dicasSelecionadas[0].titulo;
+            document.getElementById("dica1-descricao").innerText = dicasSelecionadas[0].descricao;
+            document.getElementById("dica2-titulo").innerText = dicasSelecionadas[1].titulo;
+            document.getElementById("dica2-descricao").innerText = dicasSelecionadas[1].descricao;
+
+            // Simula a barra de progresso entre 1 e 2 minutos
+            const tempoTotal = Math.floor(Math.random() * (120000 - 60000 + 1)) + 60000; // Entre 60s e 120s
+            const progresso = document.getElementById("barraProgresso");
+            const porcentagemTexto = document.getElementById("porcentagem");
+
+            let tempoPassado = 0;
+            const intervalo = 1000; // Atualização a cada 1 segundo
+            const totalPassos = tempoTotal / intervalo;
+
+            function atualizarProgresso() {
+                tempoPassado += intervalo;
+                const percentual = Math.floor((tempoPassado / tempoTotal) * 100);
+                progresso.style.width = percentual + "%";
+                porcentagemTexto.innerText = percentual + "%";
+
+                if (tempoPassado >= tempoTotal) {
+                    clearInterval(progressoInterval);
+                    window.location.href = "resultados.html"; // Redireciona para os resultados ao final
+                }
+            }
+
+            const progressoInterval = setInterval(atualizarProgresso, intervalo);
+        });
+    </script>
+</head>
+<body class="bg-white flex flex-col justify-between min-h-screen">
+
+    <div class="relative">
+        <!-- Imagem de fundo -->
+        <div class="w-full h-56 bg-cover bg-center" style="background-image: url('https://cdn.usegalileo.ai/sdxl10/317be0f7-3852-4ac0-b286-a641adf41477.png');"></div>
+
+        <!-- Título -->
+        <h1 class="text-[#111811] text-2xl font-bold px-4 pt-5">Processando sua análise...</h1>
+        <p class="text-[#111811] text-base px-4 pt-2">
+            Esta etapa leva alguns minutos. Enquanto isso, veja algumas dicas para melhorar a qualidade do solo.
+        </p>
+
+        <!-- Exibição das dicas -->
+        <div class="flex flex-col gap-4 px-4 py-3">
+            <div class="flex gap-4 bg-gray-100 p-3 rounded-lg">
+                <div class="text-green-600 flex items-center justify-center rounded-lg bg-green-200 h-12 w-12">
+                    💡
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-lg font-medium" id="dica1-titulo"></p>
+                    <p class="text-sm text-gray-700" id="dica1-descricao"></p>
+                </div>
+            </div>
+            <div class="flex gap-4 bg-gray-100 p-3 rounded-lg">
+                <div class="text-green-600 flex items-center justify-center rounded-lg bg-green-200 h-12 w-12">
+                    💡
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-lg font-medium" id="dica2-titulo"></p>
+                    <p class="text-sm text-gray-700" id="dica2-descricao"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de progresso -->
+        <div class="px-4 py-3">
+            <div class="flex justify-between">
+                <p class="text-base font-medium">Progresso</p>
+                <p class="text-base font-medium" id="porcentagem">0%</p>
+            </div>
+            <div class="w-full bg-gray-300 rounded h-2 mt-1">
+                <div id="barraProgresso" class="h-2 bg-green-600 rounded" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão (alterado para algo mais adequado) -->
+    <div class="px-4 py-3">
+        <button class="w-full bg-green-600 text-white font-bold py-3 rounded-lg">
+            Aguarde...
+        </button>
+    </div>
+
+</body>
+</html>
