@@ -4,31 +4,57 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
     <title>TurboAgro - Fazendas</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+              .menu-sanduiche {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .menu-sanduiche a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: #333;
+        }
+        .menu-sanduiche a:hover {
+            background: #f0f4f0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
   </head>
   <body class="relative flex size-full min-h-screen flex-col bg-white justify-between overflow-x-hidden" style="font-family: Manrope, sans-serif;">
     
     <!-- Menu Sanduíche -->
-    <div id="menuSidebar" class="fixed top-0 left-[-100%] w-64 h-full bg-white shadow-md transition-all duration-300 z-50">
-      <div class="p-4">
-        <h2 class="text-[#111811] text-lg font-bold mb-4">Menu</h2>
-        <ul class="space-y-3">
-          <li><a href="home.html" class="text-[#111811] block">Início</a></li>
-          <li><a href="historico_analise.html" class="text-[#111811] block">Histórico</a></li>
-          <li><a href="configuracoes.html" class="text-[#111811] block">Configurações</a></li>
-        </ul>
-      </div>
-    </div>
+    <nav class="bg-white p-4 pb-2 justify-between">
+      <button onclick="toggleMenu()" class="text-[#111811] flex size-12 shrink-0 items-center">
+          ☰
+      </button>
 
-    <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40"></div>
+      <div class="menu-sanduiche" id="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div>
       <!-- Barra de Navegação -->
-      <div class="flex items-center bg-white p-4 pb-2 justify-between">
-        <button onclick="toggleMenu()" class="text-[#111811]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-            <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
-          </svg>
-        </button>
+
         <h2 class="text-[#111811] text-lg font-bold flex-1 text-center">Minhas Fazendas</h2>
         <div class="w-12"></div>
       </div>
@@ -97,14 +123,16 @@
 
     <script>
       function toggleMenu() {
-        const menu = document.getElementById("menuSidebar");
-        const overlay = document.getElementById("overlay");
-        const isOpen = menu.style.left === "0px";
-        menu.style.left = isOpen ? "-100%" : "0px";
-        overlay.classList.toggle("hidden", isOpen);
-      }
-
-      document.getElementById("overlay").addEventListener("click", toggleMenu);
+            const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
     </script>
 
   </body>

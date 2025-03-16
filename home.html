@@ -26,36 +26,62 @@
         .carrossel::-webkit-scrollbar {
             display: none;
         }
+        .menu-sanduiche {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .menu-sanduiche a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: #333;
+        }
+        .menu-sanduiche a:hover {
+            background: #f0f4f0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
     </style>
 </head>
 <body class="bg-white flex flex-col min-h-screen">
 
     <!-- Navbar com Menu Sanduíche -->
-    <nav class="flex items-center justify-between p-4 bg-white shadow-md">
-        <button id="menu-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M40 128a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8zM40 64a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8zM40 192a8 8 0 018-8h160a8 8 0 010 16H48a8 8 0 01-8-8z"></path>
-            </svg>
+    <nav class="flex items-center bg-white p-4 pb-2 justify-between">
+        <button onclick="toggleMenu()" class="text-[#111811] flex size-12 shrink-0 items-center">
+            ☰
         </button>
         <p class="text-lg font-bold">TurboAgro</p>
         <div></div>
     </nav>
 
     <!-- Menu lateral oculto -->
-    <div id="menu" class="fixed top-0 left-0 w-64 bg-white shadow-lg h-full menu-hidden transition-transform duration-300">
-        <ul class="p-4 space-y-4">
-            <li><a href="home.html" class="block text-lg font-semibold">Início</a></li>
-            <li><a href="historico_analise.html" class="block text-lg font-semibold">Histórico</a></li>
-            <li><a href="fazendas.html" class="block text-lg font-semibold">Minhas Fazendas</a></li>
-            <li><a href="configuracoes.html" class="block text-lg font-semibold">Configurações</a></li>
-        </ul>
+    <div class="menu-sanduiche" id="menu">
+        <a href="home.html">Início</a>
+        <a href="historico_analise.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
     </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <!-- Perfil -->
     <div class="p-4 flex items-center space-x-4">
         <img class="w-16 h-16 rounded-full" src="https://cdn.usegalileo.ai/sdxl10/new_agronomo.png" alt="Perfil">
         <div>
-            <p class="text-xl font-bold">Olá, Maria</p>
+            <p class="text-xl font-bold">Olá, Bianca</p>
             <p class="text-gray-600">Pronta para fazer uma nova análise?</p>
         </div>
     </div>
@@ -89,9 +115,9 @@
 
     <!-- Rodapé -->
     <footer class="flex justify-around bg-white p-3 shadow-inner fixed bottom-0 w-full">
-        <a class="text-green-500 font-bold" href="home.html">Início</a>
-        <a class="text-gray-500" href="historico_analise.html">Histórico</a>
-        <a class="text-gray-500" href="configuracoes.html">Configurações</a>
+        <a class="text-black-500 font-bold" href="home.html">Início</a>
+        <a class="text-black-500" href="historico_analise.html">Histórico</a>
+        <a class="text-black-500" href="configuracoes.html">Configurações</a>
     </footer>
 
     <script>
@@ -101,6 +127,17 @@
             menu.classList.toggle('menu-hidden');
             menu.classList.toggle('menu-visible');
         });
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
     </script>
 
 </body>
