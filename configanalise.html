@@ -1,4 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
@@ -39,39 +43,35 @@
     <div class="p-4">
       <p class="text-[#111811] text-sm">Fazenda Selecionada</p>
       <p class="text-[#111811] text-base font-bold">Fazenda Esperança</p>
-    </div>
-
-    <div class="p-4">
+      <br>
       <p class="text-[#111811] text-sm">Gleba</p>
       <p class="text-[#111811] text-base font-bold">Gleba 1</p>
-    </div>
-
-    <!-- Captura de Localização -->
-    <div class="p-4">
+      <br>
       <p class="text-[#111811] text-sm">Localização</p>
       <p id="localizacao" class="text-[#111811] text-base font-bold">Latitude: - | Longitude: -</p>
       <button onclick="capturarLocalizacao()" class="mt-2 w-full bg-[#f0f4f0] text-[#111811] text-sm font-bold py-2 rounded-lg">Capturar Localização</button>
-    </div>
-
-    <!-- Histórico de Manejo -->
-    <div class="p-4">
+      <br><br>
       <label class="block text-[#111811] text-sm font-medium">Histórico de Manejo</label>
       <textarea class="w-full h-20 mt-2 p-2 border border-gray-300 rounded-lg resize-none" placeholder="Digite aqui..."></textarea>
+      <br><br>
+      <button onclick="window.location.href='captura_analise.html'" class="w-full bg-[#19e619] text-[#111811] text-base font-bold py-3 rounded-lg">
+        Iniciar Análise
+      </button>
+      <br><br><br><br><br><br><br><br><br><br>
+      <footer class="flex gap-2 border-t border-[#f0f4f0] bg-white px-4 pb-3 pt-2">
+        <a class="flex flex-1 flex-col items-center text-[#638863]" href="home.html">Início</a>
+        <a class="flex flex-1 flex-col items-center text-[#638863]" href="historico_analise.html">Histórico</a>
+        <a class="flex flex-1 flex-col items-center text-[#638863]" href="configuracoes.html">Configurações</a>
+      </footer>
+  
     </div>
 
     <!-- Botão Iniciar Análise -->
     <div class="p-4">
-      <button onclick="window.location.href='captura_analise.html'" class="w-full bg-[#19e619] text-[#111811] text-base font-bold py-3 rounded-lg">
-        Iniciar Análise
-      </button>
+
     </div>
 
     <!-- Footer -->
-    <footer class="flex gap-2 border-t border-[#f0f4f0] bg-white px-4 pb-3 pt-2">
-      <a class="flex flex-1 flex-col items-center text-[#638863]" href="home.html">Início</a>
-      <a class="flex flex-1 flex-col items-center text-[#638863]" href="historico_analise.html">Histórico</a>
-      <a class="flex flex-1 flex-col items-center text-[#638863]" href="configuracoes.html">Configurações</a>
-    </footer>
 
     <script>
       function capturarLocalizacao() {
