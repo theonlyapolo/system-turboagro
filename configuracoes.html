@@ -52,12 +52,14 @@
             display: block;
         }
         .profile-pic {
-            display: block;
-            margin: auto;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-        }
+    display: block;
+    margin: auto;
+    border-radius: 50%;
+    width: 120px;     /* tamanho maior para destacar */
+    height: 120px;    /* altura igual à largura */
+    object-fit: cover; /* evita distorção */
+}
+
         .menu {
             display: flex;
             justify-content: space-around;
@@ -126,9 +128,9 @@
 
     <div class="container">
         <h2>Configurações</h2>
-        <img class="profile-pic" src="https://cdn.usegalileo.ai/sdxl10/baeed253-7290-4d5e-bd89-359c24a74e22.png" alt="Perfil">
-        <p><strong>Usuário:</strong>Alice Domingos</p>
-        <p><strong>Email:</strong>alice.domingos@gmail.com</p>
+        <img class="profile-pic" src="alice.jpg" alt="Perfil">
+        <p><strong>Usuário:</strong>Alice Guimarães</p>
+        <p><strong>Email:</strong>alice.guim@gmail.com</p>
 
         <button class="settings-button">Editar Perfil</button>
         <button class="settings-button">Assinatura e Plano</button>
