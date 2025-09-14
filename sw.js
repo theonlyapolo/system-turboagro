@@ -1,4 +1,4 @@
-const cacheName = "turboagro-cache-v2";
+const cacheName = "turboagro-cache-v3";
 const filesToCache = [
   "home.html",
   "captura_analise.html",
