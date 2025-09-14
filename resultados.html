@@ -148,7 +148,7 @@
 
     <div class="header">
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <h2>Fazenda do João</h2>
+        <h2>Resultado</h2>
         <div></div> <!-- Espaço para alinhar -->
     </div>
 
@@ -159,7 +159,25 @@
     </div>
 
     <div class="container">
-        <p>Análise realizada em 10 de Junho, 2023</p>
+        <p id="data-analise"></p>
+        <script>
+        // Array com os meses em português
+        const meses = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        const hoje = new Date();
+        const dia = hoje.getDate();
+        const mes = meses[hoje.getMonth()];
+        const ano = hoje.getFullYear();
+
+        // Monta a string
+        const dataFormatada = `Análise realizada em ${dia} de ${mes}, ${ano}`;
+
+        // Joga no HTML
+        document.getElementById("data-analise").innerText = dataFormatada;
+        </script>
 
         <div class="carrossel-container" id="carousel">
             <div class="card" onclick="expandCard(this)">
