@@ -1,18 +1,19 @@
 {
   "name": "TurboAgro: Análise de Solo",
   "short_name": "TurboAgro",
-  "start_url": "login.html",
+  "start_url": "https://apolito.github.io/system-turboagro/login.html",
+  "scope": "https://apolito.github.io/system-turboagro/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
   "icons": [
     {
-      "src": "img/icone.png",
+      "src": "https://apolito.github.io/system-turboagro/img/icone.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/icone.png",
+      "src": "https://apolito.github.io/system-turboagro/img/icone.png",
       "sizes": "512x512",
       "type": "image/png"
     }
